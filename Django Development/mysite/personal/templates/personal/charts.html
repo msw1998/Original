@@ -1,0 +1,160 @@
+{% extends 'personal/header.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+	<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
+	<div style = "font-family: 'Tangerine', serif; font-size: 20px; text-shadow: 4px 4px 4px #aaa; position:absolute; top: 120px; left:150px"> Last recorded Soil value : {{Soil_fetch}}</div>
+	<div style = "font-family: 'Tangerine', serif; font-size: 20px; text-shadow: 4px 4px 4px #aaa; position:relative; top: 80px; left:550px"> Last recorded Atmosphere value : {{Atm_fetch}}</div>
+	<div style = "font-family: 'Tangerine', serif; font-size: 20px; text-shadow: 4px 4px 4px #aaa; position:absolute; top: 650px; left:120px"> Last recorded Moisture value : {{Moisture_fetch}}</div>
+	<div style = "font-family: 'Tangerine', serif; font-size: 20px; text-shadow: 4px 4px 4px #aaa; position:relative; top: 580px; left:550px"> Last recorded Humidty value : {{Humidity_fetch}}</div>
+
+
+   <div  style="position:absolute; top:150px; left:50px;">
+        <canvas id="myChart" width= "400px" height= "400px" ></canvas>
+		    </div>
+	<div  style="position:absolute; top:150px; left:500px;">
+        <canvas id="myChart2" width= "400px" height= "400px" ></canvas>
+		    </div>
+	<div  style="position:absolute; top:700px; left:50px;">
+        <canvas id="myChart3" width= "400px" height= "400px" ></canvas>
+		    </div>
+	<div  style="position:absolute; top:700px; left:500px;">
+        <canvas id="myChart4" width= "400px" height= "400px" ></canvas>
+		    </div>
+	
+	
+	<script  type = "text/javascript">
+		var datafromdjango ={{Soil_temp}};
+		var datafromdjango2={{Time}};
+		var datafromdjango3 = {{Atm_Temp}};
+		var datafromdjango4 = {{Moisture}};
+		var datafromdjango5 = {{Humidity}};
+		var ctx = document.getElementById("myChart");
+		var ctx2 = document.getElementById("myChart2");
+		var ctx3 = document.getElementById("myChart3");
+		var ctx4 = document.getElementById("myChart4");
+		
+		var myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: datafromdjango2,
+				datasets: [{
+					label: 'Soil Temperature',
+					data: datafromdjango,
+					backgroundColor: [
+						'rgba(135, 121, 105,0)'
+
+					],
+					borderColor: [
+						'rgb(160, 136, 107)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: false,
+				maintainAspectRatio: true,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+		var myChart2 = new Chart(ctx2, {
+			type: 'line',
+			data: {
+				labels: datafromdjango2,
+				datasets: [{
+					label: 'Atm Temperature',
+					data: datafromdjango3,
+					backgroundColor: [
+						'rgb(153, 204, 140,0)'
+
+					],
+					borderColor: [
+						'rgb(30, 117, 37)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: false,
+				maintainAspectRatio: true,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+		var myChart3 = new Chart(ctx3, {
+			type: 'line',
+			data: {
+				labels: datafromdjango2,
+				datasets: [{
+					label: 'Moisture',
+					data: datafromdjango4,
+					backgroundColor: [
+						'rgb(88, 182, 216,0)'
+
+					],
+					borderColor: [
+						'rgb(88, 182, 216)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: false,
+				maintainAspectRatio: true,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+		
+		var myChart4 = new Chart(ctx4, {
+			type: 'line',
+			data: {
+				labels: datafromdjango2,
+				datasets: [{
+					label: 'Humidity',
+					data: datafromdjango5,
+					backgroundColor: [
+						'rgb(216, 160, 88, 0)'
+
+					],
+					borderColor: [
+						'rgb(216, 160, 88)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: false,
+				maintainAspectRatio: true,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+	</script>
+
+
+
+{% endblock content %}
